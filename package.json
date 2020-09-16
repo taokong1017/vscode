@@ -1,7 +1,7 @@
 {
   "name": "code-oss-dev",
   "version": "1.50.0",
-  "distro": "c578fb828666b091989c812e2d2a79c2fe71ce62",
+  "distro": "676cf4810c145873f0bc2c1824088b2f199a7800",
   "author": {
     "name": "Microsoft Corporation"
   },
@@ -190,7 +190,7 @@
   },
   "optionalDependencies": {
     "vscode-windows-ca-certs": "microsoft/vscode-windows-ca-certs#99c48b75788a5093a9b99b32bb4c4236dbf78ac0",
-    "vscode-windows-registry": "1.0.2",
+    "vscode-windows-registry": "1.0.3",
     "windows-foreground-love": "0.2.0",
     "windows-mutex": "0.3.0",
     "windows-process-tree": "0.2.4"
