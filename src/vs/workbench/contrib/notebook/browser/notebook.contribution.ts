@@ -201,10 +201,6 @@ Registry.as<IEditorInputFactoryRegistry>(EditorInputExtensions.EditorInputFactor
 	NotebookDiffEditorFactory
 );
 
-function getFirstNotebookInfo(notebookService: INotebookService, uri: URI): NotebookProviderInfo | undefined {
-	return notebookService.getContributedNotebookProviders(uri)[0];
-}
-
 export class NotebookContribution extends Disposable implements IWorkbenchContribution {
 
 	constructor(
@@ -426,7 +422,6 @@ class CellContentProvider implements ITextModelContentProvider {
 		@ITextModelService textModelService: ITextModelService,
 		@IModelService private readonly _modelService: IModelService,
 		@IModeService private readonly _modeService: IModeService,
-		@INotebookService private readonly _notebookService: INotebookService,
 		@INotebookEditorModelResolverService private readonly _notebookModelResolverService: INotebookEditorModelResolverService,
 	) {
 		this._registration = textModelService.registerTextModelContentProvider(CellUri.scheme, this);
@@ -447,19 +442,7 @@ class CellContentProvider implements ITextModelContentProvider {
 			return null;
 		}
 
-		const documentAlreadyOpened = this._notebookService.listNotebookDocuments().find(document => document.uri.toString() === data.notebook.toString());
-		let viewType = documentAlreadyOpened?.viewType;
-
-		if (!viewType) {
-			const info = getFirstNotebookInfo(this._notebookService, data.notebook);
-			viewType = info?.id;
-		}
-
-		if (!viewType) {
-			return null;
-		}
-
-		const ref = await this._notebookModelResolverService.resolve(data.notebook, viewType);
+		const ref = await this._notebookModelResolverService.resolve(data.notebook);
 		let result: ITextModel | null = null;
 
 		for (const cell of ref.object.notebook.cells) {
