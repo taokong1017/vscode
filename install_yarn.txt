@@ -1,0 +1,18 @@
+使用官方推荐的方式安装Yarn JS
+这篇文章主要针对Ubuntu系统，例如Ubuntu 18.04， 16.04 等等。同样适用于Debain以及Debain发行系统。
+
+安装curl
+sudo apt install curl
+
+添加GPG key
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
+添加源
+sudo sh -c 'echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list'
+
+根系系统，刷新包列表
+sudo apt update
+sudo apt install yarn
+
+安装成功，查看版本
+yarn --version
